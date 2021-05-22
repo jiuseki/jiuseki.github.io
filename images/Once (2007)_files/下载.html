@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="ua-windows ua-webkit">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="referrer" content="always">
+    <meta name="google-site-verification" content="ok0wCgT20tBBgo9_zat2iAcimtN4Ftf5ccsh092Xeyw" />
+    <title>
+曾经 剧照
+</title>
+    
+    <meta name="baidu-site-verification" content="cZdR4xxR7RxmM4zE" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="Sun, 6 Mar 2005 01:00:00 GMT">
+    
+<meta name="keywords" content="曾经,剧照,截图,下载"/>
+<meta name="description" content="曾经剧照和截图"/>
+
+    <link rel="apple-touch-icon" href="https://img3.doubanio.com/f/movie/d59b2715fdea4968a450ee5f6c95c7d7a2030065/pics/movie/apple-touch-icon.png">
+    <link href="https://img3.doubanio.com/f/shire/6522c42d2aba9757aeefa0c35cc0cefc9229747c/css/douban.css" rel="stylesheet" type="text/css">
+    <link href="https://img3.doubanio.com/f/shire/db02bd3a4c78de56425ddeedd748a6804af60ee9/css/separation/_all.css" rel="stylesheet" type="text/css">
+    <link href="https://img3.doubanio.com/f/movie/252bef058b97005c6a41e8f1b9f7b06b84bc71b3/css/movie/base/init.css" rel="stylesheet">
+    <script type="text/javascript">var _head_start = new Date();</script>
+    <script type="text/javascript" src="https://img3.doubanio.com/f/movie/0495cb173e298c28593766009c7b0a953246c5b5/js/movie/lib/jquery.js"></script>
+    <script type="text/javascript" src="https://img3.doubanio.com/f/shire/5ecaf46d6954d5a30bc7d99be86ae34031646e00/js/douban.js"></script>
+    <script type="text/javascript" src="https://img3.doubanio.com/f/shire/b0d3faaf7a432605add54908e39e17746824d6cc/js/separation/_all.js"></script>
+    
+  <script type="text/javascript" src="https://img3.doubanio.com/f/shire/2c0c1c6b83f9a457b0f38c38a32fc43a42ec9bad/js/do.js" data-cfg-autoload="false"></script>
+
+    <style type="text/css"></style>
+    <style type="text/css">img { max-width: 100%; }</style>
+    <script type="text/javascript">
+$(function () {
+    var slide_step = 4,
+        slide_li_num = 3,
+        slide_width = 267,
+        slide_prev_time = 0,
+        slide_next_time = 0,
+        current_index = 36,
+        total_index = 270,
+        slide_li = '.slide-wrap li',
+        $slide_wrap = $('.slide-wrap ul'),
+        $prev_btn = $('.btn-prev'),
+        $next_btn = $('.btn-next'),
+        $prev_a = $('.btn-prev a'),
+        $next_a = $('.btn-next a'),
+        slide_li_templ = '<li id="{PHOTO_ID}"><a href="{PHOTO_PATH}"><img src="{IMG_PATH}" alt="" /></a></li>',
+        slide_void_templ = '<li><a href="javascript:void(0)"></a></li>',
+        slide_new_array = [],
+        slideAnimate = function (d) {
+            var step = d ? '+=' + slide_width + 'px' : '-=' + slide_width + 'px';
+            $slide_wrap.animate({'left': step}, 'slow');
+        },
+        slide_btn_switch = function () {
+            $prev_a.removeClass();
+            $next_a.removeClass();
+            if (current_index < 2) {
+                $prev_a.addClass('dis');
+            }
+            if (current_index >= total_index - 2) {
+                $next_a.addClass('dis');
+            }
+        },
+        getPhotos = function (current_id, direction) {
+            $.getJSON(
+               '/j/slide_photos',
+               {'pid':current_pid, 'relative':direction},
+               function (data) {
+                   slide_new_array = [];
+                   $.each(data.photos, function (i, n) {
+                       if (n.id) {
+                           slide_new_array[i] = slide_li_templ.replace('{IMG_PATH}', n.icon)
+                               .replace('{PHOTO_PATH}', n.path)
+                               .replace('{PHOTO_ID}', n.id);
+                       } else {
+                           slide_new_array[i] = slide_void_templ;
+                       }
+                   });
+                   if (direction === 'left') {
+                       $slide_wrap.prepend(slide_new_array.join(''));
+                   } else {
+                       $slide_wrap.append(slide_new_array.join(''));
+                       slideAnimate();
+                   }
+               }
+           );
+       };
+
+   $prev_btn.click(function () {
+       if (!$('a', this).attr('class')) {
+           if (slide_next_time < 1) {
+               current_pid = $(slide_li).eq(slide_step).attr('id');
+               getPhotos(current_pid, 'left');
+           } else {
+               slideAnimate(1);
+           }
+           slide_prev_time += 1;
+           slide_step -= slide_li_num;
+           current_index -= slide_li_num;
+           if (slide_next_time !== 0) {
+               slide_next_time -= 1;
+           }
+           slide_btn_switch();
+           return false;
+       } else { return false; }
+   });
+   $next_btn.click(function () {
+       if (!$('a', this).attr('class')) {
+           if (slide_prev_time < 1) {
+               current_pid = $(slide_li).eq(slide_step).attr('id');
+               getPhotos(current_pid, 'right');
+           } else {
+               slideAnimate();
+           }
+           slide_next_time += 1;
+           current_index += slide_li_num;
+           slide_step += slide_li_num;
+           if (slide_prev_time !== 0) {
+               slide_prev_time -= 1;
+           }
+           slide_btn_switch();
+           return false;
+       } else { return false; }
+   });
+});
+var images = new Array();
+function preload() {
+    for (i = 0; i < preload.arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+};
+preload(
+    "https://img1.doubanio.com/view/photo/l/public/p2505836207.jpg",
+        "https://img9.doubanio.com/view/photo/l/public/p2505836164.jpg",
+        "https://img2.doubanio.com/view/photo/l/public/p2505836213.jpg"
+);
+</script>
+    <link rel="stylesheet" href="https://img3.doubanio.com/misc/mixed_static/5b0c0f453faf4ee6.css">
+
+    <link rel="shortcut icon" href="https://img3.doubanio.com/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  
+    <script type="text/javascript">var _body_start = new Date();</script>
+
+    
+    
+
+
+
+    <link href="//img3.doubanio.com/dae/accounts/resources/d3e2921/shire/bundle.css" rel="stylesheet" type="text/css">
+
+
+
+<div id="db-global-nav" class="global-nav">
+  <div class="bd">
+    
+<div class="top-nav-info">
+  <ul>
+    <li>
+    <a id="top-nav-doumail-link" href="https://www.douban.com/doumail/">豆邮</a>
+    </li>
+    <li class="nav-user-account">
+      <a target="_blank" href="https://accounts.douban.com/passport/setting/" class="bn-more">
+        <span>jiuseki的帐号</span><span class="arrow"></span>
+      </a>
+      <div class="more-items">
+        <table cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td>
+                <a href="https://www.douban.com/mine/">个人主页</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a target="_blank" href="https://www.douban.com/mine/orders/">我的订单</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a target="_blank" href="https://www.douban.com/mine/wallet/">我的钱包</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a target="_blank" href="https://accounts.douban.com/passport/setting/">帐号管理</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="https://www.douban.com/accounts/logout?source=movie&ck=EBlm">退出</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+  </ul>
+</div>
+
+  <div class="top-nav-reminder">
+    <a href="https://www.douban.com/notification/" class="lnk-remind">提醒</a>
+    <div id="top-nav-notimenu" class="more-items">
+      <div class="bd">
+        <p>加载中...</p>
+      </div>
+    </div>
+  </div>
+
+    <div class="top-nav-doubanapp">
+  <a href="https://www.douban.com/doubanapp/app?channel=top-nav" class="lnk-doubanapp">下载豆瓣客户端</a>
+  <div id="doubanapp-tip">
+    <a href="https://www.douban.com/doubanapp/app?channel=qipao" class="tip-link">豆瓣 <span class="version">6.0</span> 全新发布</a>
+    <a href="javascript: void 0;" class="tip-close">×</a>
+  </div>
+  <div id="top-nav-appintro" class="more-items">
+    <p class="appintro-title">豆瓣</p>
+    <p class="qrcode">扫码直接下载</p>
+    <div class="download">
+      <a href="https://www.douban.com/doubanapp/redirect?channel=top-nav&direct_dl=1&download=iOS">iPhone</a>
+      <span>·</span>
+      <a href="https://www.douban.com/doubanapp/redirect?channel=top-nav&direct_dl=1&download=Android" class="download-android">Android</a>
+    </div>
+  </div>
+</div>
+
+    
+
+
+<div class="global-nav-items">
+  <ul>
+    <li class="">
+      <a href="https://www.douban.com" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-main&quot;,&quot;uid&quot;:&quot;96005395&quot;}">豆瓣</a>
+    </li>
+    <li class="">
+      <a href="https://book.douban.com" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-book&quot;,&quot;uid&quot;:&quot;96005395&quot;}">读书</a>
+    </li>
+    <li class="on">
+      <a href="https://movie.douban.com"  data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-movie&quot;,&quot;uid&quot;:&quot;96005395&quot;}">电影</a>
+    </li>
+    <li class="">
+      <a href="https://music.douban.com" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-music&quot;,&quot;uid&quot;:&quot;96005395&quot;}">音乐</a>
+    </li>
+    <li class="">
+      <a href="https://www.douban.com/location" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-location&quot;,&quot;uid&quot;:&quot;96005395&quot;}">同城</a>
+    </li>
+    <li class="">
+      <a href="https://www.douban.com/group" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-group&quot;,&quot;uid&quot;:&quot;96005395&quot;}">小组</a>
+    </li>
+    <li class="">
+      <a href="https://read.douban.com&#47;?dcs=top-nav&amp;dcm=douban" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-read&quot;,&quot;uid&quot;:&quot;96005395&quot;}">阅读</a>
+    </li>
+    <li class="">
+      <a href="https://douban.fm&#47;?from_=shire_top_nav" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-fm&quot;,&quot;uid&quot;:&quot;96005395&quot;}">FM</a>
+    </li>
+    <li class="">
+      <a href="https://time.douban.com&#47;?dt_time_source=douban-web_top_nav" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-time&quot;,&quot;uid&quot;:&quot;96005395&quot;}">时间</a>
+    </li>
+    <li class="">
+      <a href="https://market.douban.com&#47;?utm_campaign=douban_top_nav&amp;utm_source=douban&amp;utm_medium=pc_web" target="_blank" data-moreurl-dict="{&quot;from&quot;:&quot;top-nav-click-market&quot;,&quot;uid&quot;:&quot;96005395&quot;}">豆品</a>
+    </li>
+  </ul>
+</div>
+
+  </div>
+</div>
+<script>
+  ;window._GLOBAL_NAV = {
+    USER_ID: "96005395",
+    UPLOAD_AUTH_TOKEN: "96005395:bee5f2351bbd8afe4c1e86c02e3895621722bf1a",
+    SSE_TOKEN: "eea95b412c055a268f1754081597cf16f0b4326c",
+    SSE_TIMESTAMP: "1621666600",
+    DOUBAN_URL: "https://www.douban.com",
+    N_NEW_NOTIS: 0,
+    N_NEW_DOUMAIL: 0
+  };
+</script>
+
+
+
+    <script src="//img3.doubanio.com/dae/accounts/resources/d3e2921/shire/bundle.js" defer="defer"></script>
+
+
+
+
+    
+
+
+
+    <link href="//img3.doubanio.com/dae/accounts/resources/d3e2921/movie/bundle.css" rel="stylesheet" type="text/css">
+
+
+
+
+<div id="db-nav-movie" class="nav">
+  <div class="nav-wrap">
+  <div class="nav-primary">
+    <div class="nav-logo">
+      <a href="https:&#47;&#47;movie.douban.com">豆瓣电影</a>
+    </div>
+    <div class="nav-search">
+      <form action="https:&#47;&#47;search.douban.com&#47;movie/subject_search" method="get">
+        <fieldset>
+          <legend>搜索：</legend>
+          <label for="inp-query">
+          </label>
+          <div class="inp"><input id="inp-query" name="search_text" size="22" maxlength="60" placeholder="搜索电影、电视剧、综艺、影人" value=""></div>
+          <div class="inp-btn"><input type="submit" value="搜索"></div>
+          <input type="hidden" name="cat" value="1002" />
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  </div>
+  <div class="nav-secondary">
+    
+
+<div class="nav-items">
+  <ul>
+    <li    ><a href="https://movie.douban.com/mine"
+     >我看</a>
+    </li>
+    <li    ><a href="https://movie.douban.com/cinema/nowplaying/"
+     >影讯&购票</a>
+    </li>
+    <li    ><a href="https://movie.douban.com/explore"
+     >选电影</a>
+    </li>
+    <li    ><a href="https://movie.douban.com/tv/"
+     >电视剧</a>
+    </li>
+    <li    ><a href="https://movie.douban.com/chart"
+     >排行榜</a>
+    </li>
+    <li    ><a href="https://movie.douban.com/tag/"
+     >分类</a>
+    </li>
+    <li    ><a href="https://movie.douban.com/review/best/"
+     >影评</a>
+    </li>
+    <li    ><a href="https://movie.douban.com/annual/2020?source=navigation"
+     >2020年度榜单</a>
+    </li>
+    <li    ><a href="https://www.douban.com/standbyme/2020?fullscreen=true&hidenav=true&autorotate=false&source=movie_navigation"
+            target="_blank"
+     >2020书影音报告</a>
+    </li>
+  </ul>
+</div>
+
+    <a href="https://movie.douban.com/annual/2020?source=movie_navigation" class="movieannual"></a>
+  </div>
+</div>
+
+<script id="suggResult" type="text/x-jquery-tmpl">
+  <li data-link="{{= url}}">
+            <a href="{{= url}}" onclick="moreurl(this, {from:'movie_search_sugg', query:'{{= keyword }}', subject_id:'{{= id}}', i: '{{= index}}', type: '{{= type}}'})">
+            <img src="{{= img}}" width="40" />
+            <p>
+                <em>{{= title}}</em>
+                {{if year}}
+                    <span>{{= year}}</span>
+                {{/if}}
+                {{if sub_title}}
+                    <br /><span>{{= sub_title}}</span>
+                {{/if}}
+                {{if address}}
+                    <br /><span>{{= address}}</span>
+                {{/if}}
+                {{if episode}}
+                    {{if episode=="unknow"}}
+                        <br /><span>集数未知</span>
+                    {{else}}
+                        <br /><span>共{{= episode}}集</span>
+                    {{/if}}
+                {{/if}}
+            </p>
+        </a>
+        </li>
+  </script>
+
+
+
+
+    <script src="//img3.doubanio.com/dae/accounts/resources/d3e2921/movie/bundle.js" defer="defer"></script>
+
+
+
+
+
+    
+    <div id="wrapper">
+        
+
+        
+    <div id="content">
+        <h1><span id="title-anchor">曾经</span>
+    的剧照</h1>
+        <div class="grid-16-8 clearfix">
+            
+            
+            <div class="article">
+                
+
+<div class="opt-bar-line clearfix">
+    <a name="photo" id="photo"></a>
+    <span class="opt-left">
+        第37张/共270张
+    </span>
+    <span class="opt-mid">
+        <a href="https://movie.douban.com/photos/photo/2505836213/#title-anchor" title="用方向键←可以向前翻页" id="pre_photo">上一张</a>&nbsp;/
+        <a href="https://movie.douban.com/photos/photo/2505836164/#title-anchor" title="用方向键→可以向后翻页" id="next_photo">下一张</a>
+    </span>
+    <span class="fright">
+        &gt;&nbsp;
+            <a href="https://movie.douban.com/subject/2053515/photos?type=S">浏览所有剧照</a>
+    </span>
+</div>
+<script src="https://img3.doubanio.com/f/shire/6baf33dcf36e7f57121ba0cc92c44da20089ba01/js/photo_turn_page.js"></script>
+<style>
+.grid-16-8 .article {width:675px; padding-right:15px !important}
+.grid-16-8 .aside { width: 310px; }
+.photo-show {text-align:center;}
+.photo-wp {position: relative; display:inline-block; *display:inline; *zoom:1;}
+.photo-show img {display:block}
+.photo-zoom,.photo-zoom:hover{display:none; text-indent:-999em; overflow:hidden; position:absolute; right:0; bottom:0; height:32px; width:32px; background:url(/pics/icon_zoom_in.png);}
+</style>
+<script>
+    $(function(){
+        $(".photo-wp").hover(function(){
+            $(".photo-zoom").show();
+        },function(){
+            $(".photo-zoom").hide();
+        })
+    })
+</script>
+
+<div class="photo-show">
+    <div class="photo-wp">
+        <a class="mainphoto" href="https://movie.douban.com/photos/photo/2505836164/#title-anchor" title="点击查看下一张">
+            
+            <img src="https://img1.doubanio.com/view/photo/l/public/p2505836207.jpg" width="686" />
+        </a>
+        <a class="photo-zoom " target="_blank"
+            onclick="moreurl(this, {raw: '2505836207'})"
+            href="https://img1.doubanio.com/view/photo/raw/public/p2505836207.jpg"
+            rel="nofollow" title="查看原图">查看原图</a>
+    </div>
+</div>
+
+
+    <div class="clearfix">
+        
+
+
+    <div class="doulist-add-btn">
+  
+
+  
+
+  
+  <a href="javascript:void(0)"
+     data-id="2505836207"
+     data-cate="1025"
+     data-canview="True"
+     data-url="https://movie.douban.com/photos/photo/2505836207/"
+     data-catename=""
+     data-link="https://www.douban.com/people/96005395/doulists/all?add=2505836207&amp;cat=1025"
+     data-title="图片"
+     data-picture="https://img1.doubanio.com/view/photo/l/public/p2505836207.jpg"
+     class="lnk-doulist-add"
+     onclick="moreurl(this, { 'from':'doulist-btn-1025-2505836207-96005395'})">
+      <i></i>添加到豆列
+  </a>
+    </div>
+
+    
+    <span class="update magnifier">
+        <a target="_blank"
+            class=""
+            onclick="moreurl(this, {raw: '2505836207'})"
+            rel="nofollow"
+            href="https://img1.doubanio.com/view/photo/raw/public/p2505836207.jpg">
+            查看原图
+        </a>
+            <span class="update">
+                    <span class="gact">&gt;
+                        <a href="/misc/mp_report?type=M&amp;uid=2505836207"
+                            rel="nofollow"
+                            class=""
+                            title= "这张图片有问题" >
+                            这张图片有问题
+                        </a>
+                    </span>
+            </span>
+    </span>
+    <div class="movie-bar">
+        <div class="movie-bar-rec">
+                
+
+
+
+
+        <script type="text/javascript">
+            Do.add('dialog-css', {path: "https://img3.doubanio.com/f/shire/8377b9498330a2e6f056d863987cc7a37eb4d486/css/ui/dialog.css",
+                type: 'css'})
+            Do.add('dialog', {path: "https://img3.doubanio.com/f/shire/383a6e43f2108dc69e3ff2681bc4dc6c72a5ffb0/js/ui/dialog.js", type: 'js',
+                requires: ['dialog-css']})
+            Do.add('textarea-mention-default-style', {
+                path: "https://img3.doubanio.com/f/shire/887858ba20379f8a4789863ea7fda9a6ef36a0e5/css/lib/textarea-mention.css", type: 'css'})
+            Do.add('textarea-mention', {
+                path: "https://img3.doubanio.com/f/shire/3213351df629ca402ae8f0e1494b16b2011d8a73/js/lib/textarea-mention.js", type: 'js',
+                requires: ['mustache', 'textarea-mention-default-style']})
+            Do.add('mustache', {path: "https://img3.doubanio.com/f/shire/e0d80c43c73e241e9f218387d74a3e800d31179f/js/lib/mustache.js", type: 'js'})
+            Do.add('movie-share-css', {path: "https://img3.doubanio.com/f/movie/6ab3b78c54165a03a932babd615d11fcdbfce2a3/css/movie/share.css",
+                type: 'css'})
+            Do.add('movie:share', {path: "https://img3.doubanio.com/f/movie/230795bbf6a9a7700cc6f395067493d5dcc572ad/js/movie/share.js", type: 'js',
+                requires: ['dialog', 'textarea-mention', 'movie-share-css']})
+            Do('movie:share')
+        </script>
+
+<div class="rec-sec">
+<span class="rec">
+    <script id="movie-share" type="text/x-html-snippet">
+        
+    <form class="movie-share" action="/j/share" method="POST"><div style="display:none;"><input type="hidden" name="ck" value="EBlm"/></div>
+        <div class="clearfix form-bd">
+            <div class="input-area">
+                <textarea name="text" class="share-text" cols="72" data-mention-api="https://api.douban.com/shuo/in/complete?alt=xd&amp;callback=?"></textarea>
+                <input type="hidden" name="target-id" value="2505836207">
+                <input type="hidden" name="target-type" value="4">
+                <input type="hidden" name="title" value="电影图片: 曾经 Once‎ (2007)">
+                <input type="hidden" name="desc" value="">
+                <input type="hidden" name="redir" value="https://movie.douban.com/photos/photo/2505836207/vote?ck=EBlm"/>
+                <div class="mentioned-highlighter"></div>
+            </div>
+
+            <div class="info-area">
+                    <img class="media" src="https://img1.doubanio.com/view/photo/l/public/p2505836207.jpg" />
+                <strong>电影图片: 曾经 Once‎ (2007)</strong>
+                <p></p>
+                <p class="error server-error">&nbsp;</p>
+            </div>
+        </div>
+        <div class="form-ft">
+            <div class="form-ft-inner">
+                
+
+
+
+
+<div class="sync-setting pl">
+    <label>分享到</label>
+    <label class="share-label share-shuo" for="share-shuo">
+        
+            <input id="share-shuo" name="share-shuo" value="douban" type="checkbox" checked="checked" />豆瓣广播
+    </label>
+
+
+
+            <a id="lnk-sync-setting" class="no-visited no-hover" href="https://movie.douban.com/settings/sync" target="_blank"
+                class="pl share-label"><img src="https://img3.doubanio.com/f/movie/9389c4e5cab0cd1089a189d607d296c31ddb1bc0/pics/movie/share_g.png"
+                alt="去绑定新浪微博" />去绑定新浪微博</a>
+
+</div>
+
+<style type="text/css">
+    .sync-setting {
+        float: left;
+    }
+    #lnk-sync-setting,
+    #lnk-sync-setting:hover,
+    #lnk-sync-setting:visited {
+        vertical-align: middle;
+        color: #0192b5;
+        background: none;
+        line-height: 27px;
+        margin-right: 8px;
+    }
+    #lnk-sync-setting img {
+        vertical-align: baseline;
+        *vertical-align: middle;
+        opacity: .5;
+        filter: alpha(opacity=50);
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        *display: inline;
+        zoom: 1;
+        position: relative;
+        top: 1px;
+        margin-left: 5px;
+    }
+    #lnk-sync-setting:hover img {
+        opacity: .8;
+        background: none;
+        filter: alpha(opacity=80);
+    }
+    .share-label {
+        margin: 8px;
+        cursor: pointer;
+        vertical-align: middle;
+        *vertical-align: text-bottom;
+    }
+    .interest-form-ft .share-label input {
+        margin-bottom: 0;
+    }
+    .interest-form-ft {
+        text-align: right;
+    }
+    .interest-form-ft .bn-flat {
+        float: none;
+    }
+    .interest-form-ft .sync-setting {
+        float: left;
+        line-height: 25px;
+    }
+</style>
+
+
+                <span class="avail-num-indicator">140</span>
+                <span class="bn-flat">
+                    <input type="submit" value="推荐" />
+                </span>
+            </div>
+        </div>
+    </form>
+    
+    <div id="suggest-mention-tmpl" style="display:none;">
+        <ul>
+            {{#users}}
+            <li id="{{uid}}">
+              <img src="{{avatar}}">{{{username}}}&nbsp;<span>({{{uid}}})</span>
+            </li>
+            {{/users}}
+        </ul>
+    </div>
+
+
+    </script>
+
+        
+        <a href="#" data-share-dialog="#movie-share" data-dialog-title="推荐图片" class="lnk-sharing" 
+            share-id="2505836207" 
+            data-mode="plain" data-name="电影图片: 曾经 Once‎ (2007)" 
+            data-type="" data-desc="" 
+            data-href="https://movie.douban.com/photos/photo/2505836207/" data-image="https://img1.doubanio.com/view/photo/l/public/p2505836207.jpg" 
+            data-properties="{}" 
+            data-redir="https://movie.douban.com/photos/photo/2505836207/vote?ck=EBlm" data-text="" 
+            data-apikey="" data-curl="" 
+            data-count="10" data-object_kind="1025" 
+            data-object_id="2505836207" data-target_type="rec" 
+            data-target_action="1" 
+            data-action_props="{&#34;photo_type&#34;:&#34;剧照&#34;,&#34;photo_url&#34;:&#34;https:\/\/movie.douban.com\/photos\/photo\/2505836207\/&#34;,&#34;subject_title&#34;:&#34;曾经 Once‎ (2007)&#34;,&#34;subject_url&#34;:&#34;https:\/\/movie.douban.com\/subject\/2053515\/&#34;}">推荐</a>
+</span>
+
+
+</div>
+
+
+
+
+
+        </div>
+        <div class="movie-bar-fav">
+                
+
+
+
+
+
+
+
+
+  
+  <a class="fav-add btn-fav " title="标为喜欢？"
+      href="#"
+      data-user_id="96005395"
+      data-name="电影图片: 曾经 Once‎ (2007)"
+      data-type=""
+      data-desc=""
+      data-href="https://movie.douban.com/photos/photo/2505836207/"
+      data-image=""
+      data-properties="{}"
+      data-text=""
+      data-apikey="None"
+      data-object_kind="1025"
+      data-object_id="2505836207"
+      data-target_type="fav"
+      data-target_action="0"
+      data-action_props="{}"
+      data-tid="2505836207"
+      data-sanity_key="_8ea24"
+      data-update_num="update"
+      data-tag_align="right"
+      data-privacy="0"
+      data-tkind="1025">喜欢</a>
+      <script type="text/template" id="fav-tag-template">
+        
+<form action="" method="POST"><div style="display:none;"><input type="hidden" name="ck" value="EBlm"/></div>
+  <div class="tag-editor-bd">
+      
+
+<div class="tags-editor">
+    <fieldset class="tags-writer">
+        <label for="author_tags_clone6268">添加标签，多个标签用空格分隔，帮助你更好地整理内容</label>
+        <input id="author_tags" name="author_tags" type="hidden" value="" />
+        <input tabindex="3" id="author_tags_clone6268" class="author_tags_clone" name="author_tags_clone" type="text" value="" />
+    </fieldset>
+</div>
+<div class="tags-control">
+    <span class="tags-tip error-msg"></span>
+    <a href="#" class="tags_more">展开全部<i class="triangle triangle-right"></i></a>
+</div>
+
+  </div>
+  <div class="tag-editor-ft">
+    <span class="bn-flat"><input type="submit" value="保存"></span>
+  </div>
+</form>
+
+      </script>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="comments" class="">
+
+
+
+
+
+
+<div id="last"></div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    <h2>
+        你的回应
+            &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
+    </h2>
+
+        <div class="comment-form txd" id="add_comment">
+
+        <form name="comment_form" method="post" action="add_comment"><div style="display:none;"><input type="hidden" name="ck" value="EBlm"/></div>
+          <div class="item">
+              <textarea name="rv_comment" rows="4" cols="64"></textarea><br/>
+          </div>
+            <input type="hidden" name="start" value="0"/>
+            <div class="item">
+                <span class="bn-flat-hot rr"><input type="submit" value="加上去"></span>
+              <span>
+              <label class="pl share-label share-shuo">
+              <input type="checkbox" name="sync_to_mb"/>推荐到广播
+              </label>
+              </span>
+            </div>
+        </form></div>
+
+
+ 
+
+ 
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+
+
+<script type="text/javascript" src="https://img3.doubanio.com/f/shire/072a17e1a083e85fab3d9bb187de25d07c97f544/js/report_dialog.js"></script>
+<link rel="stylesheet" type="text/css" href="https://img3.doubanio.com/f/shire/23ff197799d608be56df5dfefb4974fa33f4579b/css/report_dialog.css" />
+
+
+<script>
+Do(function(){
+  $('#comments').find('.comment-item').hover(function(){$(this).addClass('over');}, function(){$(this).removeClass('over');});
+  $('.reply-quote .toggle-reply').click(function(e) {
+    e.preventDefault();
+    var el = $(this);
+    el.prevAll('span').toggle();
+    el.find('span').toggle();
+  });
+});
+</script>
+
+
+
+
+            </div>
+            <div class="aside">
+                
+    <div class="mod">
+        
+
+
+
+
+
+        <div class="slidebar clearfix">
+            <span class="btn-prev"><a href="https://movie.douban.com/photos/photo/2505836213/">后退</a></span>
+            <div class="slide-wrap">
+                <ul class="clearfix">
+                            <li id="2509957272">
+                                <a href="https://movie.douban.com/photos/photo/2509957272/">
+                                    <img src="https://img2.doubanio.com/view/photo/sqxs/public/p2509957272.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2509957271">
+                                <a href="https://movie.douban.com/photos/photo/2509957271/">
+                                    <img src="https://img3.doubanio.com/view/photo/sqxs/public/p2509957271.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2505836226">
+                                <a href="https://movie.douban.com/photos/photo/2505836226/">
+                                    <img src="https://img9.doubanio.com/view/photo/sqxs/public/p2505836226.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2505836213">
+                                <a href="https://movie.douban.com/photos/photo/2505836213/">
+                                    <img src="https://img2.doubanio.com/view/photo/sqxs/public/p2505836213.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2505836207" class="current">
+                                <a href="https://movie.douban.com/photos/photo/2505836207/">
+                                    <img src="https://img1.doubanio.com/view/photo/sqxs/public/p2505836207.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2505836164">
+                                <a href="https://movie.douban.com/photos/photo/2505836164/">
+                                    <img src="https://img9.doubanio.com/view/photo/sqxs/public/p2505836164.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2505836143">
+                                <a href="https://movie.douban.com/photos/photo/2505836143/">
+                                    <img src="https://img2.doubanio.com/view/photo/sqxs/public/p2505836143.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2505836121">
+                                <a href="https://movie.douban.com/photos/photo/2505836121/">
+                                    <img src="https://img3.doubanio.com/view/photo/sqxs/public/p2505836121.jpg" alt="" />
+                                </a>
+                            </li>
+                            <li id="2505836106">
+                                <a href="https://movie.douban.com/photos/photo/2505836106/">
+                                    <img src="https://img9.doubanio.com/view/photo/sqxs/public/p2505836106.jpg" alt="" />
+                                </a>
+                            </li>
+                </ul>
+            </div>
+            <span class="btn-next"><a href="https://movie.douban.com/photos/photo/2505836164/">前进</a></span>
+        </div>
+    </div>
+    <div class="mod">
+        
+    <h2>
+        图片信息
+            &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
+    </h2>
+
+        <ul class="poster-info">
+            <li>电影名称：<a href="https://movie.douban.com/subject/2053515/">曾经 Once</a></li>
+            <li>图片类型：截图 </li>
+            <li class="pl">原图尺寸：1280x688</li>
+            <li class="pl">文件大小：1267.4KB</li>
+            <li class="pl">来自：<a href="https://www.douban.com/people/81481655/">101eagle</a></li>
+            <li class="pl">上传于2017-11-25</li>
+        </ul>
+        
+<p class="pl2">&gt; <a href="https://movie.douban.com/subject/2053515/">去 曾经 的页面</a></p>
+
+    </div>
+
+    <div id="dale_movie_subject_photo_middle_right"></div>
+
+            </div>
+            <div class="extra">
+                
+
+<div class="report" id="page-report"><a rel="nofollow" href="javascript:void(0)">投诉不良信息</a></div>
+<script type="text/javascript" src="https://img3.doubanio.com/f/shire/072a17e1a083e85fab3d9bb187de25d07c97f544/js/report_dialog.js"></script>
+<link rel="stylesheet" type="text/css" href="https://img3.doubanio.com/f/shire/23ff197799d608be56df5dfefb4974fa33f4579b/css/report_dialog.css" />
+
+<script>
+       Do = (typeof Do === 'undefined')? $ : Do;
+       Do(function(){
+        $("#page-report").delegate("a", 'click', function(e){
+            var auditUrl = "https://www.douban.com/misc/audit_report?url=";
+            var url = "https://movie.douban.com/photos/photo/2505836207/";
+            generate_report_dialog({report_url: url});
+        })
+    });
+</script>
+
+
+            </div>
+        </div>
+    </div>
+
+        
+    <div id="footer">
+            <div class="footer-extra"></div>
+        
+<span id="icp" class="fleft gray-link">
+    &copy; 2005－2021 douban.com, all rights reserved 北京豆网科技有限公司
+</span>
+
+<a href="https://www.douban.com/hnypt/variformcyst.py" style="display: none;"></a>
+
+<span class="fright">
+    <a href="https://www.douban.com/about">关于豆瓣</a>
+    · <a href="https://www.douban.com/jobs">在豆瓣工作</a>
+    · <a href="https://www.douban.com/about?topic=contactus">联系我们</a>
+    · <a href="https://www.douban.com/about/legal">法律声明</a>
+    
+    · <a href="https://help.douban.com/?app=movie" target="_blank">帮助中心</a>
+    · <a href="https://www.douban.com/doubanapp/">移动应用</a>
+    · <a href="https://www.douban.com/partner/">豆瓣广告</a>
+</span>
+
+    </div>
+
+    </div>
+    <script type="text/javascript" src="https://img3.doubanio.com/misc/mixed_static/730d8aec72264416.js"></script><script type="text/javascript">
+    Do = (typeof Do === 'undefined')? $ : Do;
+    var div = ".op-lnks";
+    function addReportLink(){
+      $.each($("#comments:not('.sns-comments') .comment-item ".concat(div)), function(i, el){
+          if ($(el).find(".comment-report").length==0){
+            $(el).append('<div class="comment-report"><a rel="nofollow" href="javascript:void(0)">投诉</a></div>');
+          }
+      });
+    };
+    Do(function(){
+        $("#comments").delegate(".comment-item", 'mouseenter mouseleave', function (e) {
+          switch (e.type) {
+            case "mouseenter":
+              $(this).find(".comment-report").css('visibility', 'visible');
+              break;
+            case "mouseleave":
+              $(this).find(".comment-report").css('visibility', 'hidden');
+              break;
+          }
+        });
+        $("#comments").delegate(".comment-report a", 'click', function (e) {
+        e.preventDefault();
+        var auditUrl = "https://www.douban.com/misc/audit_report?url=",
+            opt = "comment_id";
+        var obj = $(e.target).closest('.comment-item');
+        var cid = obj.data("cid");
+        var url = "https://movie.douban.com/photos/photo/2505836207/?".concat(opt, '=', cid);
+        var type = ['comment']
+        if (/^\/subject/.test(location.pathname)) {
+            type.push('subject')
+        }
+        generate_report_dialog({report_url: url, type: type});
+        });
+    addReportLink();
+    });
+</script>
+    
+<!-- douban ad begin -->
+
+
+
+
+
+    
+<script type="text/javascript">
+    (function (global) {
+        var newNode = global.document.createElement('script'),
+            existingNode = global.document.getElementsByTagName('script')[0],
+            adSource = '//erebor.douban.com/',
+            userId = '96005395',
+            browserId = 'gx0Cak-5hLc',
+            criteria = '3:/photos/photo/2505836207/',
+            preview = '',
+            debug = false,
+            adSlots = ['dale_movie_subject_photo_middle_right'];
+
+        global.DoubanAdRequest = {src: adSource, uid: userId, bid: browserId, crtr: criteria, prv: preview, debug: debug};
+        global.DoubanAdSlots = (global.DoubanAdSlots || []).concat(adSlots);
+
+        newNode.setAttribute('type', 'text/javascript');
+        newNode.setAttribute('src', '//img1.doubanio.com/NWt2ZHQ5bC9mL2FkanMvNmEyODIwODUxODI1ZmFhMDA5YzM3YzUzM2ZmOTJkZTk5NGUzODExYS9hZC5yZWxlYXNlLmpz');
+        newNode.setAttribute('async', true);
+        existingNode.parentNode.insertBefore(newNode, existingNode);
+    })(this);
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- douban ad end -->
+<script type="text/javascript" src="https://img3.doubanio.com/f/movie/fc4a17dbc54b952506d58b93a70f83df509c2e54/js/movie/pos_fixed.js"></script>
+<script type="text/javascript">
+  (function () {
+    $().fixSide(300, 52)
+  })()
+</script>
+<script>
+    $('#edi').click(function(){
+      $('form .error-tip').hide();
+    });
+    /**
+     * @form 是表单的 jquery 对象
+     * @data 是需要验证的字符串
+     * @callback 是验证有敏感词时的回调函数
+     */
+    function checkBannedKeyword(form, data, callback){
+        $.post_withck('/j/censor', data, function(ret){
+            if(ret.ban == true){
+                callback();
+                return false;
+            }else{
+                form.submit();
+            }
+        }, 'json');
+    }
+    $('input[id=sub_desc]').click(function(e){
+        e.preventDefault();
+        $('.error-tip').remove();
+        var $textarea = $('form#desc_edit textarea'),
+            data = {key: $textarea.val()};
+        checkBannedKeyword($('form#desc_edit'), data, function(){
+            $('form#desc_edit').append($('<div class="error-tip" style="width:360px;color:#ff3300;">你的图片描述中有被禁止的内容</div>'));
+        });
+    });
+</script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var _paq = _paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+    var p=(('https:' == document.location.protocol) ? 'https' : 'http'), u=p+'://fundin.douban.com/';
+    _paq.push(['setTrackerUrl', u+'piwik']);
+    _paq.push(['setSiteId', '100001']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript';
+    g.defer=true;
+    g.async=true;
+    g.src=p+'://img3.doubanio.com/dae/fundin/piwik.js';
+    s.parentNode.insertBefore(g,s);
+})();
+</script>
+
+<script type="text/javascript">
+var setMethodWithNs = function(namespace) {
+  var ns = namespace ? namespace + '.' : ''
+    , fn = function(string) {
+        if(!ns) {return string}
+        return ns + string
+      }
+  return fn
+}
+
+var gaWithNamespace = function(fn, namespace) {
+  var method = setMethodWithNs(namespace)
+  fn.call(this, method)
+}
+
+var _gaq = _gaq || []
+  , accounts = [
+      { id: 'UA-7019765-1', namespace: 'douban' }
+    , { id: 'UA-7019765-19', namespace: '' }
+    ]
+  , gaInit = function(account) {
+      gaWithNamespace(function(method) {
+        gaInitFn.call(this, method, account)
+      }, account.namespace)
+    }
+  , gaInitFn = function(method, account) {
+      _gaq.push([method('_setAccount'), account.id]);
+      _gaq.push([method('_setSampleRate'), '5']);
+
+      
+  _gaq.push([method('_addOrganic'), 'google', 'q'])
+  _gaq.push([method('_addOrganic'), 'baidu', 'wd'])
+  _gaq.push([method('_addOrganic'), 'soso', 'w'])
+  _gaq.push([method('_addOrganic'), 'youdao', 'q'])
+  _gaq.push([method('_addOrganic'), 'so.360.cn', 'q'])
+  _gaq.push([method('_addOrganic'), 'sogou', 'query'])
+  if (account.namespace) {
+    _gaq.push([method('_addIgnoredOrganic'), '豆瓣'])
+    _gaq.push([method('_addIgnoredOrganic'), 'douban'])
+    _gaq.push([method('_addIgnoredOrganic'), '豆瓣网'])
+    _gaq.push([method('_addIgnoredOrganic'), 'www.douban.com'])
+  }
+
+      if (account.namespace === 'douban') {
+        _gaq.push([method('_setDomainName'), '.douban.com'])
+      }
+
+        _gaq.push([method('_setCustomVar'), 1, 'responsive_view_mode', 'desktop', 3])
+
+        _gaq.push([method('_setCustomVar'), 2, 'login_status', '1', 2]);
+
+      _gaq.push([method('_trackPageview')])
+    }
+
+for(var i = 0, l = accounts.length; i < l; i++) {
+  var account = accounts[i]
+  gaInit(account)
+}
+
+
+;(function() {
+    var ga = document.createElement('script');
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.setAttribute('async', 'true');
+    document.documentElement.firstChild.appendChild(ga);
+})()
+</script>
+
+
+
+
+
+
+
+
+      
+
+    <!-- dae-web-movie--default-84d6bd46d7-kzsk9-->
+
+  <script>_SPLITTEST=''</script>
+</body>
+
+</html>
+
+
