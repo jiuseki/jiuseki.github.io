@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jiuseki.github.io</id>
     <title>Jiuseki&apos;s Nest</title>
-    <updated>2022-03-14T14:53:36.180Z</updated>
+    <updated>2022-03-14T14:55:02.117Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jiuseki.github.io"/>
     <link rel="self" href="https://jiuseki.github.io/atom.xml"/>
@@ -18,11 +18,11 @@
         <updated>2022-03-14T14:34:51.000Z</updated>
         <content type="html"><![CDATA[<p>突然考古了一些很久以前的站点，不知道他们会更新到什么时候，在这里记录一下</p>
 <p>#秘密花园#<br>
-http://www.yini.org/club/garden.html</p>
+http://www.yini.org/</p>
 <p>#达也小站#<br>
-http://www.touchcn.com/index_tkm.asp</p>
+http://www.touchcn.com/</p>
 <p>#天幻网#<br>
-ffsky.com</p>
+http://ffsky.com/</p>
 <p>#病孩子#<br>
 http://www.sickbaby.org/</p>
 ]]></content>
