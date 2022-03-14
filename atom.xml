@@ -2,14 +2,31 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jiuseki.github.io</id>
     <title>Jiuseki&apos;s Nest</title>
-    <updated>2021-05-23T05:43:20.078Z</updated>
+    <updated>2022-03-14T14:51:17.994Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jiuseki.github.io"/>
     <link rel="self" href="https://jiuseki.github.io/atom.xml"/>
     <subtitle>The Best People in Life are FREE</subtitle>
     <logo>https://jiuseki.github.io/images/avatar.png</logo>
     <icon>https://jiuseki.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Jiuseki&apos;s Nest</rights>
+    <rights>All rights reserved 2022, Jiuseki&apos;s Nest</rights>
+    <entry>
+        <title type="html"><![CDATA[互联网考古]]></title>
+        <id>https://jiuseki.github.io/post/hu-lian-wang-kao-gu/</id>
+        <link href="https://jiuseki.github.io/post/hu-lian-wang-kao-gu/">
+        </link>
+        <updated>2022-03-14T14:34:51.000Z</updated>
+        <content type="html"><![CDATA[<p>突然考古了一些很久以前的站点，不知道他们会更新到什么时候，在这里记录一下</p>
+<p>#秘密花园#<br>
+http://www.yini.org/club/garden.html</p>
+<p>#达也小站#<br>
+http://www.touchcn.com/index_tkm.asp</p>
+<p>#天幻网#<br>
+ffsky.com</p>
+<p>#病孩子#<br>
+http://www.sickbaby.org/</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[如果梦照进现实]]></title>
         <id>https://jiuseki.github.io/post/xiang-bu-dao-qu-shi-me-biao-ti/</id>
